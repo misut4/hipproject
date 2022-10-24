@@ -112,15 +112,16 @@ async function updateOne(req, res) {
 }
 
 async function deleteOne(req, res) {
-  const _id = req.body._id;
+  const id = req.query.id;
 
-  if (!Project.findById(_id)) {
+  if (!Project.findById(id)) {
     return res.status(200).json({ msg: "id not found", code: 400 });
   }
 
+  console.log(id);
   Project.deleteOne({
-    _id: _id,
-  });
+    _id: id,
+  }).exec();
 
   return res.status(200).json({
     msg: "deleted",
