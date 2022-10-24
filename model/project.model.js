@@ -1,8 +1,5 @@
 const { default: mongoose } = require("mongoose");
 const projectSchema = new mongoose.Schema({
-  _id: {
-    type: String,
-  },
   name: {
     type: String,
   },

@@ -2,9 +2,6 @@ const { default: mongoose } = require("mongoose");
 const Project = require("./project.model");
 const User = require("./user.model");
 const applicationSchema = new mongoose.Schema( {
-    _id: {
-        type: String,
-    },
     prjId: {
         type: String,
         ref: Project

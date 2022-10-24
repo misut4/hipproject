@@ -5,9 +5,7 @@ async function findbyId(req, res) {
   const id = req.query.id;
   console.log(req.query.id);
   console.log(id);
-  const user = await User.findOne({
-    _id: id,
-  });
+  const user = await User.findById(id).exec()
   console.log(user);
   if (!user) {
     return res.status(200).json({ msg: "failed", code: 400 });
@@ -19,7 +17,7 @@ async function findbyId(req, res) {
 }
 
 async function findAll(req, res) {
-  User.find()
+  User.find().exec()
     .then((user) => {
       return res.json(user);
     })

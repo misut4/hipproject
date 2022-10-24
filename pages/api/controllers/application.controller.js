@@ -5,9 +5,7 @@ async function findbyId(req, res) {
   const id = req.query.id;
   console.log(req.query.id);
   console.log(id);
-  const project = await Project.findOne({
-    _id: id,
-  });
+  const application = await Application.findById(id).exec()
   console.log(project);
   if (!project) {
     return res.status(200).json({ msg: "failed", code: 400 });
@@ -19,7 +17,7 @@ async function findbyId(req, res) {
 }
 
 async function findAll(req, res) {
-  Application.find()
+  Application.find().exec()
     .then((project) => {
       return res.json(project);
     })

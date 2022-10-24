@@ -5,6 +5,8 @@ const next = require('next') // Include module next
 const project = require('./pages/api/route/project.route')
 const user = require('./pages/api/route/user.route')
 
+const paginatedResults = require('./utils/pagination')
+
 
 const port = parseInt(process.env.PORT, 10) || 3000 // Port để chạy app Nextjs, cũng là server nodejs
 const dev = process.env.NODE_ENV !== 'production'
@@ -25,8 +27,8 @@ mongoose.connection.on("error", (err) => {
   console.log("err connecting", err);
 });
 
-require('./model/project.model')
-require('./model/user.model')
+const Project = require('./model/project.model')
+const User = require('./model/user.model')
 
 //=========================================================================================================================================================
 
@@ -70,7 +72,7 @@ server.use(function (req, res, next) {
   //   return handle(req, res)
   // })
 
-  server.use('/api/prj', project)
+  server.use('/api/prj', paginatedResults(Project) ,project)
   server.use('/api/user', user)
 
 // Nếu các bạn muốn các routing tự động liến kết đến route files giống với cấu trúc của Nextjs thì chỉ cần thêm 3 dòng bên dưới

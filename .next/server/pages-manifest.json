@@ -1,10 +1,5 @@
 {
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
-  "/api/controllers/user.controller": "pages/api/controllers/user.controller.js",
-  "/api/controllers/project.controller": "pages/api/controllers/project.controller.js",
-  "/api/route/user.route": "pages/api/route/user.route.js",
-  "/api/route/project.route": "pages/api/route/project.route.js",
-  "/_document": "pages/_document.js",
-  "/404": "pages/404.html"
+  "/_document": "pages/_document.js"
 }
