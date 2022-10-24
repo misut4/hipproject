@@ -65,6 +65,12 @@ server.use(function (req, res, next) {
 
 //===============================================================================================================================
 
+//parse form data
+server.use(express.urlencoded({ extended: false }));
+
+//parse json
+server.use(express.json());
+
 //Tạo ra các router. Dòng này có ý nghĩa khi gửi request đến path /a . Sẽ render file /a.js trong thư mục pages/a.js của Nextjs
   // server.use('/api', project, (req, res) => {
   //   console.log("1");
@@ -72,7 +78,7 @@ server.use(function (req, res, next) {
   //   return handle(req, res)
   // })
 
-  server.use('/api/prj', paginatedResults(Project) ,project)
+  server.use('/api/prj', project)
   server.use('/api/user', user)
 
 // Nếu các bạn muốn các routing tự động liến kết đến route files giống với cấu trúc của Nextjs thì chỉ cần thêm 3 dòng bên dưới
