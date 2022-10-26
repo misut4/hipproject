@@ -3,9 +3,8 @@ const Project = require("../../../model/project.model");
 //DEDICATED FUNCTIONS=========================================================
 async function findbyId(req, res) {
   const id = req.query.id;
-  console.log(req.query.id);
   console.log(id);
-  const project = await Project.findById(id).exec()
+  const project = await Project.findById(id).exec();
   console.log(project);
   if (!project) {
     return res.status(200).json({ msg: "failed", code: 400 });
@@ -17,9 +16,17 @@ async function findbyId(req, res) {
 }
 
 async function findAll(req, res) {
-  Project.find().exec()
+  const pageOptions = {
+    page: parseInt(req.query.page, 10) || 0,
+    limit: parseInt(req.query.limit, 10) || 10,
+  };
+
+  Project.find()
+    .skip(pageOptions.page * pageOptions.limit)
+    .limit(pageOptions.limit)
+    .exec()
     .then((project) => {
-      return res.json({msg: "success", project});
+      return res.json({ msg: "success", pageOptions, project });
     })
     .catch((err) => {
       console.log(err);
@@ -102,7 +109,7 @@ async function updateOne(req, res) {
     category,
   });
   project
-    .update()
+    .update(_id)
     .then((result) => {
       return res.json(result);
     })
@@ -158,5 +165,5 @@ module.exports = {
   getAll,
   createPrj,
   updatePrj,
-  deletePrj
+  deletePrj,
 };
